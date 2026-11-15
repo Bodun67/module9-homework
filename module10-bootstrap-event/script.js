@@ -34,6 +34,7 @@ const ticketTypeInput = document.querySelector("#ticketType");
 const ticketQuantityInput = document.querySelector("#ticketQuantity");
 const promoCodeInput = document.querySelector("#promoCode");
 const ticketError = document.querySelector("#ticketError");
+const ticketDetailsOutput = document.querySelector("#ticketDetails");
 const subtotalOutput = document.querySelector("#subtotal");
 const quantityDiscountOutput = document.querySelector("#quantityDiscount");
 const promoDiscountOutput = document.querySelector("#promoDiscount");
@@ -72,6 +73,7 @@ ticketForm.addEventListener("submit", (event) => {
   const promoDiscount = hasPromo ? 50 : 0;
   const total = Math.max(0, subtotal - quantityDiscount - promoDiscount);
 
+  ticketDetailsOutput.textContent = `${ticketTypeInput.value === "vip" ? "VIP" : "Standard"} · ${quantity}`;
   subtotalOutput.textContent = formatUAH(subtotal);
   quantityDiscountOutput.textContent = `− ${formatUAH(quantityDiscount)} (${discountRate * 100}%)`;
   promoDiscountOutput.textContent = hasPromo ? `− ${formatUAH(promoDiscount)}` : "0 грн";
@@ -80,3 +82,4 @@ ticketForm.addEventListener("submit", (event) => {
     ? "Промокод EVENT50 застосовано. Знижка з промокоду додана після знижки за кількість."
     : "Введи EVENT50, щоб отримати додаткову знижку 50 грн.";
 });
+
